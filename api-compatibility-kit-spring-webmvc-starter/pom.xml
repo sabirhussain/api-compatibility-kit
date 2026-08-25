@@ -1,0 +1,26 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.xprevel.util.api</groupId>
+        <artifactId>api-compatibility-kit</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>api-compatibility-kit-spring-webmvc-starter</artifactId>
+    <packaging>jar</packaging>
+
+    <name>api-compatibility-kit-spring-starter</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.xprevel.util.api</groupId>
+            <artifactId>api-compatibility-kit-spring</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+</project>
