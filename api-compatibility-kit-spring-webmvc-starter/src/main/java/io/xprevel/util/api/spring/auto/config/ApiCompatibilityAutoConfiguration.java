@@ -23,13 +23,13 @@ public class ApiCompatibilityAutoConfiguration {
 
     @Bean
     @RequestScope
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(ApiVersionContext.class)
     <E extends Enum<E>> ApiVersionContext<E> apiVersionContext() {
         return new ApiVersionContext<>();
     }
 
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(ApiVersionFilter.class)
     <E extends Enum<E>> ApiVersionFilter<E> apiVersionFilter(ApiVersionResolver<E> resolver, ApiVersionContext<E> context, ApiCompatibilityProperties properties) {
         return new ApiVersionFilter<>(resolver, context, properties.getVersionHeader());
     }
