@@ -7,10 +7,10 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>api-compatibility-kit-spring</artifactId>
+    <artifactId>api-compatibility-kit-spring-webmvc</artifactId>
     <packaging>jar</packaging>
 
-    <name>api-compatibility-kit-spring</name>
+    <name>api-compatibility-kit-spring-webmvc</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -10,7 +10,7 @@
     <artifactId>api-compatibility-kit-spring-webmvc-starter</artifactId>
     <packaging>jar</packaging>
 
-    <name>api-compatibility-kit-spring-starter</name>
+    <name>api-compatibility-kit-spring-webmvc-starter</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>io.xprevel.util.api</groupId>
-            <artifactId>api-compatibility-kit-spring</artifactId>
+            <artifactId>api-compatibility-kit-spring-webmvc</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
