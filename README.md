@@ -91,7 +91,7 @@ class ApiVersionConfig {
 ```java
 
 @Bean
-ApiVersionFilter<AppVersion> apiVersionFilter(ApiVersionContext<AppVersion> context,
+ApiVersionFilter<MyAppVersion> apiVersionFilter(ApiVersionContext<MyAppVersion> context,
                                               ApiCompatibilityProperties properties) {
 
     return new ApiVersionFilter<>(req -> {
@@ -99,11 +99,11 @@ ApiVersionFilter<AppVersion> apiVersionFilter(ApiVersionContext<AppVersion> cont
                 properties.getVersionHeader());
 
         if (version == null || version.isBlank()) {
-            return AppVersion.valueOf(
+            return MyAppVersion.valueOf(
                     properties.getDefaultVersion());
         }
 
-        return AppVersion.valueOf(version);
+        return MyAppVersion.valueOf(version);
     }, context::setVersion);
 }
 ```
