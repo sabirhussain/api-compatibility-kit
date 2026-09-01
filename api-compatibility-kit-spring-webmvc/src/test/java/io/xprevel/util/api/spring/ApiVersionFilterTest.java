@@ -2,7 +2,7 @@ package io.xprevel.util.api.spring;
 
 import io.xprevel.util.api.ApiVersion;
 import io.xprevel.util.api.ApiVersionContext;
-import io.xprevel.util.api.ApiVersionResolver;
+import io.xprevel.util.api.VersionResolver;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 class ApiVersionFilterTest {
     private final ApiVersionContext<ApiVersion> context = mockApiVersionContext();
 
-    private final ApiVersionResolver<ApiVersion> resolver = new ApiVersionResolver<>(ApiVersion.V2026_02_01);
+    private final VersionResolver<ApiVersion, HttpServletRequest> resolver = (req) -> ApiVersion.valueOf(req.getHeader(Mockito.anyString()));
 
     private ApiVersionFilter<ApiVersion> filter;
 
@@ -29,7 +29,7 @@ class ApiVersionFilterTest {
 
     @BeforeEach
     void init() {
-        filter = new ApiVersionFilter<>(resolver, context, "X-API-Version");
+        filter = new ApiVersionFilter<>(resolver, context::setVersion);
     }
 
     @ParameterizedTest
@@ -45,7 +45,7 @@ class ApiVersionFilterTest {
 
     @Test
     void shouldSetDefaultApiVersionInContextWhenNoneProvided() throws Exception {
-        ApiVersionFilter<ApiVersion> versionFilter = new ApiVersionFilter<>(new ApiVersionResolver<>(ApiVersion.V2026_02_01), context, "X-API-Version");
+        ApiVersionFilter<ApiVersion> versionFilter = new ApiVersionFilter<>(req -> req.getHeader(Mockito.anyString()) == null ? ApiVersion.V2026_02_01 : ApiVersion.V2026_08_01, context::setVersion);
         FilterChain chain = Mockito.mock(FilterChain.class);
         HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
         Mockito.when(request.getHeader(Mockito.anyString())).thenReturn(null);

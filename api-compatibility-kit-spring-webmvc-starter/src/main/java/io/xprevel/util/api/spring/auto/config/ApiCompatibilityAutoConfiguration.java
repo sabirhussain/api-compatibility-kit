@@ -5,7 +5,9 @@ import io.xprevel.util.api.ApiVersionContext;
 import io.xprevel.util.api.ApiVersionResolver;
 import io.xprevel.util.api.spring.ApiVersionFilter;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBooleanProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.context.annotation.RequestScope;
@@ -16,9 +18,10 @@ public class ApiCompatibilityAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(ApiVersionResolver.class)
+    @ConditionalOnBooleanProperty(name = "api.compatibility.use-builtin-api-version")
+    @ConditionalOnProperty(name = "api.compatibility.default-version")
     ApiVersionResolver<ApiVersion> apiVersionResolver(ApiCompatibilityProperties properties) {
-        ApiVersion version = ApiVersion.valueOf(properties.getDefaultVersion());
-        return new ApiVersionResolver<>(version);
+        return new ApiVersionResolver<>(ApiVersion.valueOf(properties.getDefaultVersion()));
     }
 
     @Bean
@@ -31,6 +34,8 @@ public class ApiCompatibilityAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(ApiVersionFilter.class)
     <E extends Enum<E>> ApiVersionFilter<E> apiVersionFilter(ApiVersionResolver<E> resolver, ApiVersionContext<E> context, ApiCompatibilityProperties properties) {
-        return new ApiVersionFilter<>(resolver, context, properties.getVersionHeader());
+        return new ApiVersionFilter<>(req ->
+                resolver.resolve(req.getHeader(properties.getVersionHeader()))
+                , context::setVersion);
     }
 }

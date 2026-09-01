@@ -1,6 +1,6 @@
 package io.xprevel.util.api;
 
-public class ApiVersionResolver<E extends Enum<E>> {
+public final class ApiVersionResolver<E extends Enum<E>> {
     private final E defaultApiVersion;
 
     public ApiVersionResolver(E defaultApiVersion) {
