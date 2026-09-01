@@ -82,6 +82,26 @@ public class PaymentResource {
 }
 ```
 
+## Release Preparation
+
+Use the provided `release-prepare.sh` script to tag a release. It strips `-SNAPSHOT`, verifies the build, creates a local release commit, tags it, then reverts the commit so development continues on SNAPSHOT.
+
+```bash
+# Validate without making permanent changes
+./release-prepare.sh --dry-run
+
+# Prepare the release (creates tag, reverts pom changes)
+./release-prepare.sh
+```
+
+Once the tag is created locally, push it to trigger the release:
+
+```bash
+git push origin <version>   # e.g. git push origin 1.0.0
+```
+
+> **Note:** Do not push the release commit — only the tag is needed. Developers continue working on the SNAPSHOT version as normal.
+
 ## Contributing
 Contributions are welcome!
 - Fork the repository
