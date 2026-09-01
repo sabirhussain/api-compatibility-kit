@@ -92,7 +92,7 @@ class ApiVersionConfig {
 
 @Bean
 ApiVersionFilter<MyAppVersion> apiVersionFilter(ApiVersionContext<MyAppVersion> context,
-                                              ApiCompatibilityProperties properties) {
+                                                ApiCompatibilityProperties properties) {
 
     return new ApiVersionFilter<>(req -> {
         String version = req.getHeader(
