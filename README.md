@@ -28,8 +28,8 @@ Add the dependency to your `pom.xml`:
 
 <dependency>
     <groupId>io.xprevel.util.api</groupId>
-    <artifactId>api-compatibility-kit-spring-starter</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <artifactId>api-compatibility-kit-spring-webmvc-starter</artifactId>
+    <version>${LATEST}</version>
 </dependency>
 ```
 
